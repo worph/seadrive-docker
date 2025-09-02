@@ -24,6 +24,8 @@ RUN apt-get update && apt-get install -y \
     libevent-2.1-7 \
     libcurl4 \
     uuid-runtime \
+    gettext-base \
+    sudo \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
@@ -33,11 +35,13 @@ RUN useradd -r -u 1000 -m -s /bin/bash seadrive \
     && mkdir -p /seadrive/data \
     && mkdir -p /seadrive/logs \
     && mkdir -p /seadrive/config \
-    && chown -R seadrive:seadrive /seadrive
+    && chown -R seadrive:seadrive /seadrive \
+    && chmod 755 /seadrive/mount \
+    && echo "seadrive ALL=(ALL) NOPASSWD: /bin/mount, /bin/umount" >> /etc/sudoers
 
 # Download SeaDrive AppImage (CLI version for server use)
 RUN wget -O /usr/local/bin/seadrive-cli \
-    "https://download.seadrive.org/releases/${SEADRIVE_VERSION}/SeaDrive-cli-x86_64-${SEADRIVE_VERSION}.AppImage" \
+    "https://download.seadrive.org/SeaDrive-cli-x86_64-${SEADRIVE_VERSION}.AppImage" \
     && chmod +x /usr/local/bin/seadrive-cli \
     && ln -s /usr/local/bin/seadrive-cli /usr/local/bin/seadrive
 

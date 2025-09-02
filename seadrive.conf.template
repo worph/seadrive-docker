@@ -1,0 +1,12 @@
+[account]
+server = ${SEAFILE_SERVER}
+username = ${SEAFILE_USERNAME}
+token = ${SEAFILE_TOKEN}
+is_pro = false
+
+[general]
+client_name = ${CLIENT_NAME}
+
+[cache]
+size_limit = ${CACHE_SIZE_LIMIT}
+clean_cache_interval = ${CACHE_CLEAN_INTERVAL}

@@ -1,0 +1,24 @@
+services:
+  seadrive:
+    build: .
+    image: seadrive-docker:latest
+    container_name: seadrive-client
+    restart: unless-stopped
+    
+    # Required for FUSE filesystem support
+    devices:
+      - /dev/fuse
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    
+    environment:
+      # Required - replace with your server details
+      - SEAFILE_SERVER=xxxxxxxxxxxxxxxxx
+      - SEAFILE_USERNAME=xxxxxxxxxxxxxxxxx
+      - SEAFILE_PASSWORD=xxxxxxxxxxxxxxxxx
+      # Optional configuration
+      - CLIENT_NAME=seadrive-docker
+      - CACHE_SIZE_LIMIT=10GB
+      - CACHE_CLEAN_INTERVAL=10

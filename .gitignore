@@ -1,2 +1,21 @@
+# Local development files
+docker-compose.yml
+.env
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary and log files
+*.log
+.DS_Store
+Thumbs.db
+
+# Local mount points and data
+seadrive-mount/
+tmp/
 CLAUDE.md
 .claude/
