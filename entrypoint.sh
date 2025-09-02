@@ -99,10 +99,6 @@ start_seadrive() {
     
     if mountpoint -q "$mount_point"; then
         log "SeaDrive mounted successfully at $mount_point"
-        
-        # Note: Host bind mounting can be added here if needed
-        # Example: sudo mount --bind "$mount_point" "/mnt/host-mount"
-        
         log "SeaDrive is ready! Files available at $mount_point"
         
         # Keep the container running by waiting for the SeaDrive process
@@ -125,8 +121,7 @@ cleanup() {
         kill "$SEADRIVE_PID" || true
     fi
     
-    # Clean up any bind mounts if they were created
-    # sudo umount "/mnt/host-mount" 2>/dev/null || true
+    # Clean up FUSE mount
     if mountpoint -q "$MOUNT_POINT"; then
         log "Unmounting $MOUNT_POINT"
         fusermount -u "$MOUNT_POINT" || true
